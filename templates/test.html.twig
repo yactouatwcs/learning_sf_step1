@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if slug is defined%}
+        <p>test route with slug {{slug}} works</p>
+    {% else %}
+        <p>test route works</p>
+    {% endif %}
+{% endblock %}

@@ -1,21 +1,26 @@
-version: '3'
+volumes:
+  database:
+  database_config:
 
 services:
-###> doctrine/doctrine-bundle ###
-  database:
-    image: postgres:${POSTGRES_VERSION:-14}-alpine
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
-      # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
-    volumes:
-      - db-data:/var/lib/postgresql/data:rw
-      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
-###< doctrine/doctrine-bundle ###
 
-volumes:
-###> doctrine/doctrine-bundle ###
-  db-data:
-###< doctrine/doctrine-bundle ###
+  database:
+    image: mariadb:10.9.3
+    ports:
+    - 3306:3306
+    environment:
+      # ! do not use this in production
+      - MYSQL_ALLOW_EMPTY_PASSWORD="yes"
+    volumes:
+      - database:/var/lib/mysql
+      - database_config:/etc/mysql
+
+  phpmyadmin:
+      image: phpmyadmin:latest
+      restart: unless-stopped
+      ports:
+          - 8080:80
+      environment:
+          # we specify that we connect to an arbitrary server with the flag below
+          # "arbitrary" means you're able to specify which database server to use on login page of phpmyadmin      
+          - PMA_ARBITRARY=1
