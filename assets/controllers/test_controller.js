@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import axios from 'axios';
 
 /*
  * This is an example Stimulus controller!
@@ -11,13 +12,23 @@ import { Controller } from '@hotwired/stimulus';
  */
 export default class extends Controller {
 
+    /**
+     * declaring which value we allow to pass in
+     * from Twig to the Stimulus controller
+     * via a static property
+     */
+    static values = {
+        url: String
+    };
+
     // connect() {
     //     console.log("test controller loaded");
     // }
 
     async doSomethingAsync(e) {
         e.preventDefault();
-        console.log("doing something async");
+        const APICall = await axios.get(this.urlValue);
+        console.log(APICall.data);
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Item;
 use App\Repository\ItemRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,14 @@ class ItemController extends AbstractController
     {
         return $this->render('item/index.html.twig', [
             'items' => $itemRepository->findAll()
+        ]);
+    }
+
+    #[Route('/items/{id}', name: 'app_item')]
+    public function show(Item $item): Response
+    {
+        return $this->render('item/show.html.twig', [
+            'item' => $item
         ]);
     }
 

@@ -7,7 +7,9 @@
     {% else %}
         <p>test route works</p>
     {% endif %}
-    <div {{ stimulus_controller('test') }}>
+    <div {{ stimulus_controller('test', {
+        url: 'https://jsonplaceholder.typicode.com/posts'
+    }) }}>
         <button
             {{ stimulus_action('test', 'doSomethingAsync') }}
         >do something async</button>
