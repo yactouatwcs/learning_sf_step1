@@ -10,7 +10,14 @@ import { Controller } from '@hotwired/stimulus';
  * Delete this file or adapt it for your use!
  */
 export default class extends Controller {
-    connect() {
-        this.element.textContent = 'test Stimulus! Edit me in assets/controllers/test_controller.js';
+
+    // connect() {
+    //     console.log("test controller loaded");
+    // }
+
+    async doSomethingAsync(e) {
+        e.preventDefault();
+        console.log("doing something async");
     }
+
 }

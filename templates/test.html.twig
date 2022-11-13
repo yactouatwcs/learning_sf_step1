@@ -7,5 +7,9 @@
     {% else %}
         <p>test route works</p>
     {% endif %}
-    <p {{ stimulus_controller('test') }}></p>
+    <div {{ stimulus_controller('test') }}>
+        <button
+            {{ stimulus_action('test', 'doSomethingAsync') }}
+        >do something async</button>
+    </div>
 {% endblock %}
