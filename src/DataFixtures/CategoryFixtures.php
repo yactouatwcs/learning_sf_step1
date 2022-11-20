@@ -15,7 +15,6 @@ class CategoryFixtures extends Fixture
         'categ3',
         'categ4',
         'categ5',
-
     ];
 
     public function load(ObjectManager $manager): void

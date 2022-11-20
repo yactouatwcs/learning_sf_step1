@@ -21,6 +21,7 @@ class ItemController extends AbstractController
     #[Route('/items/{id}', name: 'app_item')]
     public function show(Item $item): Response
     {
+        // ParamConverter requires `sensio/framework-extra-bundle` dependency to be installed to function properly
         return $this->render('item/show.html.twig', [
             'item' => $item
         ]);
